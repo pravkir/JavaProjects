@@ -3,6 +3,7 @@ package com.dws.challenge.web;
 import com.dws.challenge.domain.Account;
 import com.dws.challenge.exception.DuplicateAccountIdException;
 import com.dws.challenge.service.AccountsService;
+import com.dws.challenge.domain.TransferRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import javax.validation.Valid;
 
@@ -53,7 +55,7 @@ public class AccountsController {
 
   @PostMapping(path = "/transfer")
   public void transferMoney(@RequestBody TransferRequest transferRequest) {
-      System.out.println("Money " + transferRequest.getAmount() + " transferred from " + transferRequest.getAccountFromId() + " to account " + transferRequest.getAccountToId());
+     log.info("Money {} transferred from {} to account {} ", transferRequest.getAmount(),transferRequest.getAccountFromId(),transferRequest.getAccountToId());
       this.accountsService.transferMoney(transferRequest.getAccountFromId(), transferRequest.getAccountToId(), transferRequest.getAmount());
   }
 }
